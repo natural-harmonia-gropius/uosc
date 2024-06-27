@@ -95,20 +95,6 @@ function create_select_tracklist_type_menu_opener(menu_title, track_type, track_
 	local function serialize_tracklist(tracklist)
 		local items = {}
 
-		if download_command then
-			items[#items + 1] = {
-				title = t('Download'), bold = true, italic = true, hint = t('search online'), value = '{download}',
-			}
-		end
-		if load_command then
-			items[#items + 1] = {
-				title = t('Load'), bold = true, italic = true, hint = t('open file'), value = '{load}',
-			}
-		end
-		if #items > 0 then
-			items[#items].separator = true
-		end
-
 		local track_prop_index = tonumber(mp.get_property(track_prop))
 		local first_item_index = #items + 1
 		local active_index = nil
@@ -158,6 +144,20 @@ function create_select_tracklist_type_menu_opener(menu_title, track_type, track_
 					active_index = #items
 				end
 			end
+		end
+
+		if #items > 0 then
+			items[#items].separator = true
+		end
+		if download_command then
+			items[#items + 1] = {
+				title = t('Download'), bold = true, italic = true, hint = t('search online'), value = '{download}',
+			}
+		end
+		if load_command then
+			items[#items + 1] = {
+				title = t('Load'), bold = true, italic = true, hint = t('open file'), value = '{load}',
+			}
 		end
 
 		return items, active_index or first_item_index
