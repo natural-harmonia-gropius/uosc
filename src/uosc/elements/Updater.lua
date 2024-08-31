@@ -123,7 +123,7 @@ function Updater:render()
 			color = fg, border = options.text_border * state.scale, border_color = bg,
 		})
 	else
-		ass:icon(center_x, divider_y, icon_size * 0.8, self.state, {
+		ass:icon(center_x, divider_y, icon_size * 0.8, ({ ['done'] = "", ['error'] = "" })[self.state], {
 			color = color, border = options.text_border * state.scale, border_color = bg,
 		})
 	end
@@ -159,7 +159,7 @@ function Updater:render()
 		-- Icon
 		local x = round(button_rect.ax + (button_rect.bx - button_rect.ax) / 2)
 		local y = round(button_rect.ay + (button_rect.by - button_rect.ay) / 2)
-		ass:icon(x, y, icon_size * 0.8, 'close', {color = bg})
+		ass:icon(x, y, icon_size * 0.4, '', {color = bg})
 
 		cursor:zone('primary_click', button_rect, function() self:destroy() end)
 	end
