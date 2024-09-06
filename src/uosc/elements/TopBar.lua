@@ -18,7 +18,7 @@ function TopBar:init()
 	end
 
 	local close = {icon = 'close', hover_bg = '2311e8', hover_fg = 'ffffff', command = function() mp.command('quit') end}
-	local max = {icon = 'crop_square', command = maximized_command}
+	local max = {icon = 'crop_square', command = maximized_command, is_maximize = true}
 	local min = {icon = 'minimize', command = function() mp.command('cycle window-minimized') end}
 	self.buttons = options.top_bar_controls == 'left' and {close, max, min} or {min, max, close}
 
@@ -137,6 +137,10 @@ function TopBar:render()
 		end
 
 		for _, button in ipairs(self.buttons) do
+			if button.is_maximize then
+				button.icon = state.fullscreen and 'close_fullscreen' or (state.maximized and 'filter_none' or 'crop_square')
+			end
+
 			local rect = {ax = button_ax, ay = self.ay, bx = button_ax + self.size, by = self.by}
 			local is_hover = get_point_to_rectangle_proximity(cursor, rect) == 0
 			local opacity = is_hover and config.opacity.title or config.opacity.controls
