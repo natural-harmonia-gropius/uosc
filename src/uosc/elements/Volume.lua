@@ -244,22 +244,24 @@ function Volume:render()
 	local ass = assdraw.ass_new()
 	local width_half = (mute_rect.bx - mute_rect.ax) / 2
 	local height_half = (mute_rect.by - mute_rect.ay) / 2
-	local icon_size = math.min(width_half, height_half) * 1.5
-	local icon_name, icon_back, horizontal_shift = 'volume_up', 'volume_up', 0
+	local icon_size = math.min(width_half, height_half)
+	local icon_name, icon_back = '', ''
 	if state.mute then
-		icon_name, icon_back = 'volume_off', 'volume_off'
+		icon_name, icon_back = '', ''
 	elseif state.volume <= 0 then
-		icon_name, horizontal_shift = 'volume_mute', height_half * 0.23
-	elseif state.volume <= 60 then
-		icon_name, horizontal_shift = 'volume_down', height_half * 0.12
+		icon_name = ''
+	elseif state.volume <= 33 then
+		icon_name = ''
+	elseif state.volume <= 66 then
+		icon_name = ''
 	elseif state.volume > 100 then
-		icon_name, icon_back = 'brand_awareness', 'brand_awareness'
+		icon_name, icon_back = '', ''
 	end
 	local underlay_opacity = {main = visibility * 0.3, border = visibility}
 	ass:icon(mute_rect.ax + width_half, mute_rect.ay + height_half, icon_size, icon_back,
 		{border = options.text_border * state.scale, opacity = underlay_opacity, align = 5}
 	)
-	ass:icon(mute_rect.ax + width_half - horizontal_shift, mute_rect.ay + height_half, icon_size, icon_name,
+	ass:icon(mute_rect.ax + width_half, mute_rect.ay + height_half, icon_size, icon_name,
 		{opacity = visibility, align = 5}
 	)
 	return ass
