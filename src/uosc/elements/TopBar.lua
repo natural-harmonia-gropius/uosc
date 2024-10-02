@@ -14,13 +14,7 @@ function TopBar:init()
 	self.main_title, self.alt_title = nil, nil
 
 	local function maximized_command()
-		if state.platform == 'windows' then
-			mp.command(state.border
-				and (state.fullscreen and 'set fullscreen no;cycle window-maximized' or 'cycle window-maximized')
-				or 'set window-maximized no;cycle fullscreen')
-		else
-			mp.command(state.fullormaxed and 'set fullscreen no;set window-maximized no' or 'set window-maximized yes')
-		end
+		mp.command(state.fullormaxed and 'set fullscreen no;set window-maximized no' or 'set window-maximized yes')
 	end
 
 	local close = {icon = 'close', hover_bg = '2311e8', hover_fg = 'ffffff', command = function() mp.command('quit') end}
