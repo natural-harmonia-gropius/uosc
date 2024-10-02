@@ -1488,7 +1488,7 @@ function Menu:render()
 			is_icon_hovered = get_point_to_rectangle_proximity(cursor, icon_hitbox) == 0
 			local text = selected_action and selected_action.label or is_icon_hovered and menu.footnote
 			local opacity = (is_icon_hovered and 1 or 0.5) * menu_opacity
-			ass:icon(icon_x, icon_y, self.font_size, is_icon_hovered and 'help' or 'help_outline', {
+			ass:icon(icon_x, icon_y, self.font_size, 'help', {
 				color = fg, border = state.scale, border_color = bg, opacity = opacity,
 			})
 			if text then
