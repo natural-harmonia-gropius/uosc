@@ -426,7 +426,7 @@ function Timeline:render()
 			and thumbnail.width ~= 0
 			and thumbnail.height ~= 0
 		then
-			local border = math.ceil(math.max(2, state.radius / 2) * state.scale)
+			local border = math.ceil(0.5 * state.scale)
 			local thumb_x_margin, thumb_y_margin = border + tooltip_gap + bax, border + tooltip_gap
 			local thumb_width, thumb_height = thumbnail.width, thumbnail.height
 			local thumb_x = round(clamp(
@@ -442,7 +442,7 @@ function Timeline:render()
 				border = 1,
 				opacity = {main = config.opacity.thumbnail, border = 0.08 * config.opacity.thumbnail},
 				border_color = fg,
-				radius = state.radius,
+				radius = 0,
 			})
 			local thumb_seconds = (state.rebase_start_time == false and state.start_time) and (hovered_seconds - state.start_time) or hovered_seconds
 			mp.commandv('script-message-to', 'thumbfast', 'thumb', thumb_seconds, thumb_x, thumb_y)
