@@ -94,10 +94,10 @@ function create_self_updating_menu_opener(opts)
 		local actions = opts.actions or {}
 		if opts.on_move then
 			actions[#actions + 1] = {
-				name = 'move_up', icon = 'arrow_upward', label = t('Move up') .. ' (ctrl+up/pgup/home)',
+				name = 'move_up', icon = '', label = t('Move up') .. ' (ctrl+up/pgup/home)',
 			}
 			actions[#actions + 1] = {
-				name = 'move_down', icon = 'arrow_downward', label = t('Move down') .. ' (ctrl+down/pgdwn/end)',
+				name = 'move_down', icon = '', label = t('Move down') .. ' (ctrl+down/pgdwn/end)',
 			}
 		end
 		if opts.on_reload then
@@ -108,7 +108,7 @@ function create_self_updating_menu_opener(opts)
 			if opts.on_remove and opts.on_delete then
 				label = t('Remove') .. ' (' .. t('%s to delete', 'del, ctrl+del') .. ')'
 			end
-			actions[#actions + 1] = {name = 'remove', icon = 'delete', label = label}
+			actions[#actions + 1] = {name = 'remove', icon = '', label = label}
 		end
 
 		function remove_or_delete(index, value, menu_id, modifiers)
@@ -287,7 +287,7 @@ function create_select_tracklist_type_menu_opener(opts)
 				hint = t('open file'),
 				value = '{load}',
 				actions = opts.download_command
-					and {{name = 'download', icon = 'language', label = t('Search online')}}
+					and {{name = 'download', icon = '', label = t('Search online')}}
 					or nil,
 			}
 		end
@@ -831,11 +831,11 @@ function open_open_file_menu()
 			allowed_types = config.types.media,
 			active_path = active_file,
 			directory_actions = {
-				{name = 'add_to_playlist', icon = 'playlist_add', label = t('Add to playlist') .. ' (shift+enter/click)'},
-				{name = 'force_open', icon = 'play_circle_outline', label = t('Open in mpv') .. ' (ctrl+enter/click)'},
+				{name = 'add_to_playlist', icon = '', label = t('Add to playlist') .. ' (shift+enter/click)'},
+				{name = 'force_open', icon = '', label = t('Open in mpv') .. ' (ctrl+enter/click)'},
 			},
 			file_actions = {
-				{name = 'add_to_playlist', icon = 'playlist_add', label = t('Add to playlist') .. ' (shift+enter/click)'},
+				{name = 'add_to_playlist', icon = '', label = t('Add to playlist') .. ' (shift+enter/click)'},
 			},
 			keep_open = true,
 			on_close = function() mp.unregister_event(handle_file_loaded) end,
@@ -973,21 +973,21 @@ function open_subtitle_downloader()
 				{
 					title = t('Subtitles loaded & enabled'),
 					bold = true,
-					icon = 'check',
+					icon = '',
 					selectable = false,
 				},
 				{
 					title = t('Remaining downloads today: %s', data.remaining .. '/' .. data.total),
 					italic = true,
 					muted = true,
-					icon = 'file_download',
+					icon = '',
 					selectable = false,
 				},
 				{
 					title = t('Resets in: %s', data.reset_time),
 					italic = true,
 					muted = true,
-					icon = 'schedule',
+					icon = '',
 					selectable = false,
 				},
 			})
@@ -1045,7 +1045,7 @@ function open_subtitle_downloader()
 					value = {kind = 'file', id = sub.attributes.files[1].file_id, url = url},
 					keep_open = true,
 					actions = url and
-						{{name = 'open_in_browser', icon = 'open_in_new', label = t('Open in browser') .. ' (shift)'}},
+						{{name = 'open_in_browser', icon = '', label = t('Open in browser') .. ' (shift)'}},
 				}
 			end)
 
@@ -1061,7 +1061,7 @@ function open_subtitle_downloader()
 					align = 'center',
 					bold = true,
 					italic = true,
-					icon = 'navigate_before',
+					icon = '',
 					keep_open = true,
 					value = {kind = 'page', query = query, page = data.page - 1},
 				}
@@ -1073,7 +1073,7 @@ function open_subtitle_downloader()
 					align = 'center',
 					bold = true,
 					italic = true,
-					icon = 'navigate_next',
+					icon = '',
 					keep_open = true,
 					value = {kind = 'page', query = query, page = data.page + 1},
 				}

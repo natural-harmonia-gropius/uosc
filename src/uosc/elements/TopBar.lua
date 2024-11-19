@@ -17,9 +17,9 @@ function TopBar:init()
 		mp.command(state.fullormaxed and 'set fullscreen no;set window-maximized no' or 'set window-maximized yes')
 	end
 
-	local close = {icon = 'close', hover_bg = '2311e8', hover_fg = 'ffffff', command = function() mp.command('quit') end}
-	local max = {icon = 'square', command = maximized_command, is_maximize = true}
-	local min = {icon = 'remove', command = function() mp.command('cycle window-minimized') end}
+	local close = {icon = '', hover_bg = '2311e8', hover_fg = 'ffffff', command = function() mp.command('quit') end}
+	local max = {icon = '', command = maximized_command, is_maximize = true}
+	local min = {icon = '', command = function() mp.command('cycle window-minimized') end}
 	self.buttons = options.top_bar_controls == 'left' and {close, max, min} or {min, max, close}
 
 	self:decide_titles()
@@ -138,7 +138,7 @@ function TopBar:render()
 
 		for _, button in ipairs(self.buttons) do
 			if button.is_maximize then
-				button.icon = state.fullscreen and 'close_fullscreen' or (state.maximized and 'filter_none' or 'square')
+				button.icon = state.fullscreen and '' or (state.maximized and '' or '')
 			end
 
 			local rect = {ax = button_ax, ay = self.ay, bx = button_ax + self.size, by = self.by}
@@ -157,7 +157,7 @@ function TopBar:render()
 				color = button_bg, opacity = visibility * opacity, radius = state.radius,
 			})
 
-			ass:icon(bg_ax + bg_size / 2, bg_ay + bg_size / 2, bg_size * 0.5, button.icon, {
+			ass:icon(bg_ax + bg_size / 2, bg_ay + bg_size / 2, bg_size * 0.33, button.icon, {
 				color = button_fg,
 				border_color = button_bg,
 				opacity = visibility,
