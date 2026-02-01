@@ -1576,9 +1576,9 @@ function Menu:render()
 				local size = round(2 * state.scale)
 				local v_padding = math.min(state.radius, math.ceil(self.item_height / 3))
 				ass:rect(
-					content_rect.ax - size - 1, item_ay + v_padding,
-					content_rect.ax - 1, item_by - v_padding,
-					{radius = 1 * state.scale, color = fg, opacity = menu_opacity, clip = item_clip}
+					content_rect.ax + 4, item_ay + v_padding,
+					content_rect.ax + size + 4, item_by - v_padding,
+					{radius = 2 * state.scale, color = fg, opacity = menu_opacity, clip = item_clip}
 				)
 			end
 
