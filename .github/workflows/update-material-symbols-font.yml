@@ -28,7 +28,7 @@ jobs:
           node-version: latest
 
       - name: Download and validate the latest font
-        run: npm --prefix .github/workflows run update-font
+        run: node .github/workflows/update-material-symbols-font/script.js
 
       - name: Stage and check changes
         id: changes
