@@ -1,0 +1,8 @@
+{
+	"name": "uosc-workflows",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"update-font": "node update-material-symbols-font.js"
+	}
+}
