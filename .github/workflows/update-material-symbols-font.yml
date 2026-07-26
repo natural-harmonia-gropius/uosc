@@ -1,0 +1,51 @@
+name: Update Material Symbols font
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-material-symbols-font
+  cancel-in-progress: false
+
+jobs:
+  update-font:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the default branch
+        uses: actions/checkout@main
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@main
+        with:
+          node-version: latest
+
+      - name: Download and validate the latest font
+        run: npm run update-font
+
+      - name: Check for changes
+        id: changes
+        shell: bash
+        run: |
+          if git diff --quiet -- src/fonts/uosc_icons.ttf; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push the update
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- src/fonts/uosc_icons.ttf
+          git commit -m "Update Material Symbols Rounded font"
+          git push origin "HEAD:${{ github.event.repository.default_branch }}"
