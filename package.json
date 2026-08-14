@@ -1,0 +1,8 @@
+{
+	"name": "uosc",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"update-font": "node tools/update-material-symbols-font.js"
+	}
+}
