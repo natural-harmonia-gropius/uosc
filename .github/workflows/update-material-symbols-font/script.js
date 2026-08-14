@@ -9,7 +9,7 @@ const MANIFEST_URL =
 	"https://fonts.google.com/download/list?" +
 	"family=Material%20Symbols%20Rounded";
 const SOURCE_FILENAME = "static/MaterialSymbolsRounded-Regular.ttf";
-const REPOSITORY_ROOT = fileURLToPath(new URL("../../", import.meta.url));
+const REPOSITORY_ROOT = fileURLToPath(new URL("../../../", import.meta.url));
 const OUTPUT_PATH = path.join(REPOSITORY_ROOT, "src", "fonts", "uosc_icons.ttf");
 const DISPLAY_OUTPUT_PATH = path.join("src", "fonts", "uosc_icons.ttf");
 const MAX_DOWNLOAD_SIZE = 20 * 1024 * 1024;
