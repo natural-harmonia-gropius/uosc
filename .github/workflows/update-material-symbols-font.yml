@@ -28,7 +28,7 @@ jobs:
           node-version: latest
 
       - name: Download and validate the latest font
-        run: npm run update-font
+        run: npm --prefix .github/workflows run update-font
 
       - name: Check for changes
         id: changes

@@ -3,12 +3,15 @@
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const MANIFEST_URL =
 	"https://fonts.google.com/download/list?" +
 	"family=Material%20Symbols%20Rounded";
 const SOURCE_FILENAME = "static/MaterialSymbolsRounded-Regular.ttf";
-const OUTPUT_PATH = path.join("src", "fonts", "uosc_icons.ttf");
+const REPOSITORY_ROOT = fileURLToPath(new URL("../../", import.meta.url));
+const OUTPUT_PATH = path.join(REPOSITORY_ROOT, "src", "fonts", "uosc_icons.ttf");
+const DISPLAY_OUTPUT_PATH = path.join("src", "fonts", "uosc_icons.ttf");
 const MAX_DOWNLOAD_SIZE = 20 * 1024 * 1024;
 
 async function download(url) {
@@ -118,7 +121,7 @@ async function main() {
 	await replaceFont(font);
 
 	const digest = createHash("sha256").update(font).digest("hex");
-	console.log(`Updated ${OUTPUT_PATH} from ${SOURCE_FILENAME}`);
+	console.log(`Updated ${DISPLAY_OUTPUT_PATH} from ${SOURCE_FILENAME}`);
 	console.log(`Size: ${font.length} bytes`);
 	console.log(`SHA-256: ${digest}`);
 }
